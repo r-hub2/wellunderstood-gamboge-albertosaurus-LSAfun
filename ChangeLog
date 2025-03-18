@@ -1,0 +1,186 @@
+[version 0.8.1] ChangeLog
+
+(1) Added the function centroid_analysis()
+
+
+
+[version 0.7.1] ChangeLog
+
+(1) Added the functions analogy() and SND()
+
+(2) Updates to functions that compute a document/sentence vector from the included word vectors:
+	costring(), multicostring(), MultipleChoice(), multidocs()
+	(2.1) Added a "method" option to choose how document/sentence vectors are computed from the word vectors: 
+			method="Add" for vector additon, or method="Multiply" for element-wise multiplication
+	(2.2) Added a "stopword" option to specify a character vector of words that should not 
+			be used to compute the document/sentence vector
+			
+(3) Updates to the MultipleChoice() function
+	(3.1) Added a "all.results" option to determine the output value of the function:
+			"all.results=FALSE" (default): As in the previous versions, only returns the closest answer option
+			"all.results=TRUE": returns a named numeric vector, where the names are the different answer options,
+								and the numeric values their respective cosine similarity to the question, 
+								sorted by decreasing similarity
+	(3.2) Added the third option method="Analogy" beyond method="Add" and method="Multiply" inherited from costring()
+
+
+
+[version 0.6.3] ChangeLog
+
+(1) Removed the breakdown() function - take care that your queries match the entries of your semantic spaces!
+
+
+
+[version 0.6.2] ChangeLog
+
+(1) Updated the costring() and multicostring() functions 
+	(1.1) Now includes a remove.punctuation option (default: remove.punctuation=TRUE)
+			In the previous version, a sentence such as "the lion, the tiger, and the gazelle" would
+			be split into words such as "lion," or "tiger," instead of "lion" and "tiger", which
+			would then typically not be found in the semantic space
+	(1.2) Now includes a split option (default: split=" ") that allows users to define the character
+			by which the document/sentence should be split into individual words
+	(1.3) Now already returns a Note when *some* words cannot be found in the semantic space, instead of
+			just a warning when *all* words cannot be found
+
+
+[version 0.6.1] ChangeLog
+
+(1) Minor bug-fix
+
+
+
+[version 0.6] ChangeLog
+
+(1) Added the functions multidocs() and plot_doclist()
+
+(2) Updated the functions plot_neighbors and plot_wordlists
+    (2.1) The luminance gradient alpha and the color of connect.lines and start.lines can
+	        now be changed independently from one another
+	(2.2) Replaced alpha="shade" with alpha="graded". However, alpha="shade" still works and is 
+	      automatically converted to alpha="graded".
+	(2.3) Added the parameter alpha.grade (default alpha.grade = 1) which allows to scale 
+	        the luminance of all connect.lines and start.lines by a certain factor when alpha="graded"
+	(2.4) Added more color palette options for the col parameter (heat.colors, terrain.colors,
+	        topo.colors, cm.colors)
+	(2.5) It is now also possible to include any customized color palette using the col parameter
+	(2.6) Added the parameter legend (default legend=T) to illustrate the color scheme of the connect.lines 
+	(2.7) Added the parameter size to control the size of the plots
+	(2.8) Changed the default parameters to connect.lines="all" and col="rainbow"
+	(2.9) Fixed a bug where connect.lines would not show the correct number of lines when set to a numerical value
+	    
+
+		
+[version 0.5.3] ChangeLog
+
+(1) Fixed a bug where the distance() function returned NULL values for the "euclidean" option
+
+(2) Updated the Example in the documentation for the MultipleChoice() function so that it no
+    longer produces Warnings
+
+(3) Updated the link to the website containing semantic spaces in the package description
+	
+
+	
+[version 0.5.2] ChangeLog
+
+(1) All functions that want to use character vectors now automatically try to convert
+    the input to characters using as.character(). They inform the user with the message
+	"Note: x converted to character" when doing so.
+
+	
+
+[version 0.5.1] ChangeLog
+
+(1) All functions relying on a specification of a tvectors argument can now not
+    only deal with "matrix" objects as input for tvectors, but also with "data.frame" 
+	or "textmatrix" objects
+	
+	
+
+[version 0.5] ChangeLog
+
+(1) Set breakdown=FALSE as default for all functions (instead of breakdown=TRUE)
+
+(2) Added the function pairwise()
+
+(3) Added a new CITATION file, citing the LSAfun journal article
+
+
+
+[version 0.4.1] ChangeLog
+
+(1) Corrected a wrong formula that caused asym() to give wrong values for
+    method="clarkede" and method ="invcl"
+
+[version 0.4] ChangeLog
+
+(1) Added asymmetric similarity functions
+    (1.1) The asym() function, containing various functions for computing 
+	      "category-inclusion" (hypernymy) similarities, and the SIM function
+		  proposed by Kintsch (2014)
+	(1.1) Similarity-in-context function conSIM() according to Kintsch (2014)
+
+(2) Added function for distances between vectors with the distance() function, 
+    including the Euclidean Distance and City Block Distance
+	
+(3) Added measures for plausibility/ semantic transparency of vectors 
+    with the plausibility() function
+	
+(4) Extended the compose() function by including method="CConv" and method="Dilation"
+	
+	
+
+[version 0.3.2] ChangeLog
+
+(1) Made MultipleChoice() more adaptive if one answer alternative cannot be found
+
+(2) Added cex parameter for plot_wordlist() and plot_neighbors()
+
+
+
+[version 0.3.1] ChangeLog
+
+(1) Added datasets: syntest, oldbooks, priming
+
+(2) Changed function names: neighbours() to neighbors()
+                            plot_neighbours() to plot_neighbors()
+
+(3) Updates for plot_neighbors() and plot_wordlist()
+	(3.1) Changed a bug in plot_neighbors() and plot_wordlist() that always plotted 
+		  two- as well as three-dimensional plots
+	(3.2) plot_neighbors() and plot_wordlist() now also give the coordinates for
+		  the words in the plot as a data frame (default output)
+
+		  
+		  
+[version 0.3] ChangeLog
+
+(1) Modifications for breakdown(), can now deal with more special characters  
+
+(2) Added the argument "method" and the argument "dims" to plot_neighbours()
+
+(3) Added the function plot_wordlist()
+
+
+
+[version 0.2] ChangeLog
+
+(1) Added function normalize()
+	(1.1) Enabled Argument norm for compose()
+	(1.2) Enabled Argument norm for Predication()
+	(1.3) Updated Help file for compose() and Predication()
+
+
+(2) Calling the function Cosine() for words that are not in rownames(tvectors) now returns NA instead of the warning message as value
+	(2.1) Affects the functions Cosine(), compose(), neighbours()
+
+(3) For functions using the argument tvectors, the warning message "tvectors must be a matrix!" was replaced by an error message
+
+(4) Fixed a bug in plot_neighbours() where the function sometimes did not find the neighbours in rownames(tvectors) due to "breakdown" issues
+
+(5) Major updates for plot_neighbours() - prettier plots
+	(5.1) Added parameter "alpha" (luminance for start.lines and connect.lines, with option "shade)
+	(5.2) Added parameter "col" (with additional option "rainbow" for rainbow colors depending on cosine between two words)
+    (5.3) Added option "all" for "connect.lines" (will automatically use alpha="shade")
+	(5.4) Updated Help file for plot_neighbours()
